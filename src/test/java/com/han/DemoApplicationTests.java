@@ -1,7 +1,9 @@
 package com.han;
 
 import com.han.domain.Board;
+import com.han.domain.QBoard;
 import com.han.persistence.BoardRepository;
+import com.querydsl.core.BooleanBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +130,35 @@ public class DemoApplicationTests {
 	    Pageable pageable = PageRequest.of(0, 10);
 	    repo.finddByPage(pageable)
                 .forEach(board -> System.out.println(board));
+    }
+
+    @Test
+    public void testPredicate() {
+	    String type = "t";
+	    String keyword = "17";
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        QBoard board = QBoard.board;
+
+        if (type.equals("t")) {
+            builder.and(board.title.like("%" + keyword + "%"));
+        }
+
+        builder.and(board.bno.gt(0L));
+
+        Pageable pageable = PageRequest.of(0, 10);
+
+        Page<Board> result = repo.findAll(builder, pageable);
+
+        System.out.println("Page size: " + result.getSize());
+        System.out.println("Total pages: " + result.getTotalPages());
+        System.out.println("Total count: " + result.getTotalElements());
+        System.out.println("Next: " + result.nextPageable());
+
+        List<Board> list = result.getContent();
+
+        list.forEach(b -> System.out.println(b) );
     }
 
 
