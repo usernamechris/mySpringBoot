@@ -1,0 +1,42 @@
+<!-- thymeleaf 유틸리티 객체. OGNL표현식을 Java 메서트처람 사용가능하게 해줌 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1 th:text="${now}"></h1>  <!-- Fri Oct 13 16:03:26 KST 2017 -->
+    <h1 th:text="${price}"></h1> <!-- 123456789-->
+    <h1 th:text="${title}"></h1> <!-- This is a just sample-->
+    <h1 th:text="${options}"></h1> <!-- [AAA, BBB, CCC, DDD]-->
+
+    <!------------------ 유틸 객체 ------------------>
+    <!-- 날짜 -->
+    <h2 th:text="${#dates.format(now, 'yyyy-MM-dd')}"></h2> <!--2017-10-13 -->
+
+    <div th:with="timeValue=${#dates.createToday()}">
+        <p>[[${timeValue}]]</p> <!-- Fri Oct 13 00:00:00 KST 2017-->
+    </div>
+
+    <!-- 숫자 -->
+    <h2 th:text="${#numbers.formatInteger(price,3,'COMMA')}"></h2> <!--123,456,789 -->
+
+    <div th:with="priceValue=99.87654">
+        <p th:text="${#numbers.formatInteger(priceValue,3, 'COMMA')}"></p> <!-- 100-->
+        <p th:text="${#numbers.formatDecimal(priceValue,5,10,'POINT')}"></p> <!-- 00099.8765400000-->
+    </div>
+
+    <!-- 문자 -->
+    <h1 th:text="${title}"></h1> <!--This is a just sample -->
+
+    <span th:utext="${#strings.replace(title, 's', '<b>s</b>')}"></span> <!-- This is a just sample-->
+    <ul>
+        <li th:each="str:${#strings.listSplit(title, ' ')}">[[${str}]]</li>
+        <!-- This
+            is
+            a
+            just
+        sample-->
+    </ul>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- thymeleaf 링크처리 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <ul>
+        <li><a th:href="@{http://localhost:8000/sample1}">sample1</a> </li> <!-- 절대경로 처리 -->
+        <li><a th:href="@{/sample1}">sample1</a> </li> <!-- 현재 컨텍스트 경로/sample1-->
+        <li><a th:href="@{~/sample1}">sample1</a> </li> <!-- 현재 프로젝트 경로/sample1-->
+
+        <li><a th:href="@{/sample1(p1='aaa', p2='bbb')}">sample1</a> </li> <!-- 파라미터 전달 -->
+    </ul>
+</body>
+</html>

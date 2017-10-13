@@ -1,3 +1,4 @@
+<!-- thymeleaf utext: html thymeleaf내에 적용 -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Thymeleaf3</title>
@@ -5,7 +6,7 @@
 </head>
 <body>
 <h1 th:text="${vo}">Thymeleaf Test Page</h1>
-<div th:utext='${"<h3>" + vo.mid + "</h3>"}'></div>
-<div th:text='${"<h3>" + vo.mid + "</h3>"}'></div>
+<div th:utext='${"<h3>" + vo.mid + "</h3>"}'></div> <!-- u00 -->
+<div th:text='${"<h3>" + vo.mid + "</h3>"}'></div> <!-- <h3>u00</h3> -->
 </body>
 </html>

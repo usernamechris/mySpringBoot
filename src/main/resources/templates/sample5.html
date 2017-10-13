@@ -1,3 +1,4 @@
+<!-- thymeleaf 인라인 스타일로 사용 -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Thymeleaf3</title>
@@ -5,23 +6,13 @@
 </head>
 <body>
 
-<table border="1" th:with="target='u0001'">
-    <tr>
-        <td>MID</td>
-        <td>MNAME</td>
-        <td>REGDATE</td>
-    </tr>
+<script th:inline="javascript">
+   var result = [[${result}]]; // "SUCCESS" 자바스크립트 문자열 제대로 생성
+</script>
 
-    <tr th:each="member : ${list}">
-        <td th:if="${member.mid}">
-            <a href="/modify" th:if="${member.mid == target}">MODIFY</a>
-            <p th:unless="${member.mid == target}">VIEW</p>
-        </td>
-        <!--<td th:text="${member.mid == target ? 'SECRET':member.mid}">Doe</td>-->
-        <td th:text="${member.mname}"></td>
-        <td th:text="${#dates.format(member.regdate, 'yyyy-MM-dd')}"></td>
-    </tr>
-</table>
+<script>
+    var result = [[${result}]]; // SUCCESS 변수처럼 선언
+</script>
 
 </body>
 </html>
